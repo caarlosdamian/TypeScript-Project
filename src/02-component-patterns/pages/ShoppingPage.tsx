@@ -3,6 +3,7 @@ import ProductCard, {
   ProductTitle,
   ProductImage,
 } from "../components/index";
+import "../styles/custom-styles.css";
 
 const products = [
   {
@@ -24,14 +25,33 @@ export const ShoppingPage = () => {
 
       <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         {products.map((value) => (
-          <ProductCard product={value} key={value.id}>
-            <ProductImage img={value.img} />
-            <ProductTitle title={value.title} />
-            <ProductButtons />
+          <ProductCard
+            className="bg-dark text-white"
+            product={value}
+            key={value.id}
+          >
+            <ProductImage className="custom-image" img={value.img} />
+            <ProductTitle className="text-bold" title={value.title} />
+            <ProductButtons className="custom-buttons" />
           </ProductCard>
         ))}
         {products.map((value) => (
-          <ProductCard product={value} key={value.id}>
+          <ProductCard
+            className="bg-dark text-white"
+            product={value}
+            key={value.id}
+          >
+            <ProductCard.Image className="custom-image" img={value.img} />
+            <ProductCard.Title className="text-bold" title={value.title} />
+            <ProductCard.Buttons className="custom-buttons" />
+          </ProductCard>
+        ))}
+        {products.map((value) => (
+          <ProductCard
+            style={{ backgroundColor: "#70D1F8" }}
+            product={value}
+            key={value.id}
+          >
             <ProductCard.Image img={value.img} />
             <ProductCard.Title title={value.title} />
             <ProductCard.Buttons />
