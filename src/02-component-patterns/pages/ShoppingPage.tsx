@@ -3,21 +3,13 @@ import ProductCard, {
   ProductTitle,
   ProductImage,
 } from "../components/index";
+import products from "../data/products";
 import "../styles/custom-styles.css";
-
-const products = [
-  {
-    id: "1",
-    title: "Coffe Mug - Card",
-    img: "./coffee-mug.png",
-  },
-  {
-    id: "2",
-    title: "Coffe Mug - NoIMG",
-  },
-];
+import { useShoppingCard } from "../hooks/userShoppingCart";
 
 export const ShoppingPage = () => {
+  const { onProductCountChange, shoppingCart } = useShoppingCard();
+
   return (
     <div>
       <h1>Shopping Store</h1>
@@ -29,32 +21,31 @@ export const ShoppingPage = () => {
             className="bg-dark text-white"
             product={value}
             key={value.id}
+            onChange={onProductCountChange}
+            value={shoppingCart[value.id]?.count || 0}
           >
             <ProductImage className="custom-image" img={value.img} />
             <ProductTitle className="text-bold" title={value.title} />
             <ProductButtons className="custom-buttons" />
           </ProductCard>
         ))}
-        {products.map((value) => (
+      </div>
+      <div className="shopping-cart">
+        {Object.entries(shoppingCart).map(([key, product]) => (
           <ProductCard
             className="bg-dark text-white"
-            product={value}
-            key={value.id}
+            product={product}
+            key={key}
+            style={{ width: "100px" }}
+            value={product.count}
+            onChange={onProductCountChange}
           >
-            <ProductCard.Image className="custom-image" img={value.img} />
-            <ProductCard.Title className="text-bold" title={value.title} />
-            <ProductCard.Buttons className="custom-buttons" />
-          </ProductCard>
-        ))}
-        {products.map((value) => (
-          <ProductCard
-            style={{ backgroundColor: "#70D1F8" }}
-            product={value}
-            key={value.id}
-          >
-            <ProductCard.Image img={value.img} />
-            <ProductCard.Title title={value.title} />
-            <ProductCard.Buttons />
+            <ProductImage className="custom-image" img={product.img} />
+            <ProductTitle className="text-bold" title={product.title} />
+            <ProductButtons
+              className="custom-buttons"
+              style={{ display: "flex", justifyContent: "center" }}
+            />
           </ProductCard>
         ))}
       </div>
