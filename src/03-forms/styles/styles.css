@@ -5,7 +5,7 @@ form {
 }
 
 input, select {
-    margin-top: 5px;
+    margin-top: 10px;
     outline: none;
     padding: 10px;
 }
