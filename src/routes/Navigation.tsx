@@ -2,26 +2,56 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NavLink
-} from 'react-router-dom';
-
-import logo from '../logo.svg';
+  NavLink,
+} from "react-router-dom";
+import {
+  FormikAbstraction,
+  FormikBasicPage,
+  FormikComponents,
+  FormikYupPage,
+  RegisterPage,
+} from "../03-forms/pages/";
+import logo from "../logo.svg";
 
 export const Navigation = () => {
   return (
     <Router>
       <div className="main-layout">
         <nav>
-            <img src={ logo } alt="React Logo" />
+          <img src={logo} alt="React Logo" />
           <ul>
             <li>
-              <NavLink to="/" activeClassName="nav-active" exact>Home</NavLink>
+              <NavLink to="/register" activeClassName="nav-active" exact>
+                Register
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/about" activeClassName="nav-active" exact>About</NavLink>
+              <NavLink to="/formik-basic" activeClassName="nav-active" exact>
+                Formik basic
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/users" activeClassName="nav-active" exact>Users</NavLink>
+              <NavLink to="/formik-yup" activeClassName="nav-active" exact>
+                Formik Yup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-abstraction"
+                activeClassName="nav-active"
+                exact
+              >
+                Formik Abstraction
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-components"
+                activeClassName="nav-active"
+                exact
+              >
+                Formik Components
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -29,17 +59,21 @@ export const Navigation = () => {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            <h1>About</h1>
-          </Route>
+          <Route path="/register" exact component={RegisterPage} />
+          <Route path="/formik-basic" exact component={FormikBasicPage} />
+          <Route path="/formik-yup" exact component={FormikYupPage} />
+          <Route path="/formik-components" exact component={FormikComponents} />
+          <Route
+            path="/formik-abstraction"
+            exact
+            component={FormikAbstraction}
+          />
+
           <Route path="/users">
             <h1>Users</h1>
-          </Route>
-          <Route path="/">
-            <h1>Home</h1>
           </Route>
         </Switch>
       </div>
     </Router>
   );
-}
+};
